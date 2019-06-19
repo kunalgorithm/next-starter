@@ -1,0 +1,67 @@
+{
+    "version": 2,
+
+    "name": "example-app",
+
+    "builds": [
+        {
+            "src": "package.json",
+            "use": "@now/next@canary",
+            "config": {
+                "maxLambdaSize": "10mb"
+            }
+        },
+
+        {
+            "src": "static/*",
+            "use": "@now/static"
+        },
+        {
+            "src": "static/*/*",
+            "use": "@now/static"
+        }
+    ],
+    "routes": [
+        {
+            "src": "/signup",
+            "dest": "/signup"
+        },
+        {
+            "src": "/login",
+            "dest": "/login"
+        },
+        {
+            "src": "/profile",
+            "dest": "/profile"
+        },
+        {
+            "src": "/admin",
+            "dest": "/admin"
+        },
+        {
+            "src": "/featured",
+            "dest": "/featured"
+        },
+        {
+            "src": "/pricing",
+            "dest": "/pricing"
+        },
+        {
+            "src": "/admin/(.[^/]*)",
+            "dest": "/admin/$1"
+        },
+        {
+            "src": "/admin/editconnector/(?<arg1>[^/]+)",
+            "dest": "/admin/editconnector?arg1=$arg1"
+        },
+
+        {
+            "src": "/(?<arg1>[^/]+)",
+            "dest": "/connector?arg1=$arg1"
+        },
+        {
+            "src": "/(?<arg1>[^/]+)/(?<arg2>[^/]+)",
+            "dest": "/connector?arg1=$arg1&arg2=$arg2"
+        }
+    ]
+}
